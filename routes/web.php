@@ -15,12 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Route::get('/employees', function () {
     return view('employees');
-});
+})->name('employees');
 
 Route::get('/projects', function () {
     return view('projects');
-});
+})->name('projects');
+
+Route::any('/{anything}', function(){ 
+    return view('errors/error'); 
+})->where('anything', '.*');
