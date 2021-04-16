@@ -1,4 +1,7 @@
 @extends('layouts.master')
 @section('content')
-    <h1>Hello World!!!</h1>
-@endsection
+    @foreach ($projects as $project)
+        <h1>{{ $project['title'] }}</h1>
+        <p>{{ $project['text'] }}</p>
+    @endforeach
+@endsection   

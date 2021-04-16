@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ProjectController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,13 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('index');
 
-Route::get('/employees', function () {
-    return view('employees');
-})->name('employees');
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+Route::get('/employees/{id}', [EmployeeController::class, 'show'])->name('employees.show');
 
-Route::get('/projects', function () {
-    return view('projects');
-})->name('projects');
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
 
 Route::any('/{anything}', function(){ 
     return view('errors/error'); 
