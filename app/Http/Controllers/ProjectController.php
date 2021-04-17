@@ -15,12 +15,23 @@ class ProjectController extends Controller{
     }
 
     public function store(Request $request){
+        $this->validate($request, [
+               'project_name' => 'required|unique:projects,project_name|max:20',
+               'project_employees' => 'required|max:40',
+        ]);
         $pr = new Project();
         $pr->project_name = $request['project_name'];
         $pr->project_employees = $request['project_employees'];
-        return ($pr->save() == 1) 
-        ? redirect('/projects')
-        : "Project was not created";
+
+        return ($pr->save() !== 1) 
+        ? redirect('/projects')->with('status_success', 'Project was created!') 
+        : redirect('/projects')->with('status_error', 'Project was not created!');
+
+    }
+
+    public function destroy($id){
+        Project::destroy($id);
+        return redirect('/projects')->with('status_success', 'Project deleted!');
     }
 
 }
