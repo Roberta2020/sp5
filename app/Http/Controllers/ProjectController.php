@@ -1,23 +1,26 @@
 <?php
 use App\Http\Controllers\Controller;
 namespace App\Http\Controllers;
+use App\Models\Project;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller{
-    // array imitates our model / database
-    private $projects = [
-        ['id' => 1, 'title' => 'Title 1', 'text' => 'Some text 1'],
-        ['id' => 2, 'title' => 'Title 2', 'text' => 'Some text 2']
-    ];
 
     public function index(){
-        return view('projects', ['projects' => $this->projects]);
+        return view('projects', ['projects' => Project::all()]);
     }
 
     public function show($id){
-        foreach($this->projects as $project){
-            if($project['id'] == $id){
-                return $project;
-            }
-        }
+        return view('project', ['project' => Project::find($id)]);
     }
+
+    public function store(Request $request){
+        $pr = new Project();
+        $pr->project_name = $request['project_name'];
+        $pr->project_employees = $request['project_employees'];
+        return ($pr->save() == 1) 
+        ? redirect('/projects')
+        : "Project was not created";
+    }
+
 }
