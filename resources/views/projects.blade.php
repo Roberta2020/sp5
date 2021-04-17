@@ -32,10 +32,13 @@
                     <td>{{ $project['project_name'] }}</td>
                     <td>{{ $project['project_employees'] }}</td>
                     <td>
-                        <form action="{{ route('projects.destroy', $project['id']) }}" method="POST">
+                        <form class="d-inline" action="{{ route('projects.destroy', $project['id']) }}" method="POST">
                             @method('DELETE') @csrf
                             <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit" value="DELETE">
-                        </form>                
+                        </form> 
+                        <form class="d-inline" action="{{ route('projects.show', $project['id']) }}" method="GET">
+                            <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit" value="UPDATE">
+                        </form>  
                     </td>
                 </tr>
             @endforeach

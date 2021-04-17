@@ -25,6 +25,8 @@ Route::get('/projects', [ProjectController::class, 'index'])->name('projects.ind
 Route::get('/projects/{id}', [ProjectController::class, 'show'])->name('projects.show');
 Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
 Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+Route::put('/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
+
 
 Route::any('/{anything}', function(){ 
     return view('errors/error'); 
