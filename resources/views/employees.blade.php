@@ -30,7 +30,8 @@
                 <tr>
                     <td>{{ $employee['id'] }}</td>
                     <td>{{ $employee['employee_name'] }}</td>
-                    <td>{{ $employee['project_id'] }}</td>
+                    <td>
+                        {{ $employee->project['project_name'] }}</td>
                     <td>
                         <form class="d-inline" action="{{ route('employees.destroy', $employee['id']) }}" method="POST">
                             @method('DELETE') @csrf
@@ -59,12 +60,15 @@
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <label for="project_id">Attached projects:</label><br>
-        <input type="text" id="project_id" name="project_id"><br><br>
+        <select name="project_id" id="project_id">
+            <option value="" selected>--- None ---</option>
+            @foreach (App\Models\Project::all() as $project)
+                <option value="{{ $project['id'] }}">{{ $project['project_name'] }}</option>
+            @endforeach
+        </select><br><br>
+        @error('project_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <input class="btn" type="submit" value="Submit" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);">
     </form>
 @endsection
-
-
-
-
-

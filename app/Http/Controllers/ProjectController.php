@@ -25,11 +25,11 @@ class ProjectController extends Controller
     {
         $this->validate($request, [
             'project_name' => 'required|unique:projects,project_name|max:20',
-            'project_employees' => 'required|max:40',
+            'project_city' => 'required|max:40',
         ]);
         $pr = new Project();
         $pr->project_name = $request['project_name'];
-        $pr->project_employees = $request['project_employees'];
+        $pr->project_city = $request['project_city'];
 
         return ($pr->save() !== 1)
             ? redirect('/projects')->with('status_success', 'Project was created!')
@@ -46,11 +46,11 @@ class ProjectController extends Controller
     {
         $this->validate($request, [
             'project_name' => 'required|unique:projects,project_name, ' . $id . ',id|max:20',
-            'project_employees' => 'required|max:40',
+            'project_city' => 'required|max:40',
         ]);
         $pr = Project::find($id);
         $pr->project_name = $request['project_name'];
-        $pr->project_employees = $request['project_employees'];
+        $pr->project_city = $request['project_city'];
         return ($pr->save() !== 1)
             ? redirect('/projects/' . $id)->with('status_success', 'Project was updated!')
             : redirect('/projects/' . $id)->with('status_error', 'Project was not updated!');

@@ -21,7 +21,7 @@
             <tr>
                 <th>ID</th>
                 <th>Project name</th>
-                <th>Project employees</th>
+                <th>Project city</th>
                 <th>Project employees</th>
                 <th>Actions</th>
             </tr>
@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{ $project['id'] }}</td>
                     <td>{{ $project['project_name'] }}</td>
-                    <td>{{ $project['project_employees'] }}</td>
+                    <td>{{ $project['project_city'] }}</td>
                     <td>
                         @foreach ($project->employees as $employee)
                             {{ $employee['employee_name'] }}{{ $loop->last ? '' : ', ' }}
@@ -49,7 +49,7 @@
                         </form>
                         <form class="d-inline" action="{{ route('projects.show', $project['id']) }}" method="GET">
                             <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit"
-                                value="ADD EMPLOYEE">
+                                value="ATTACH EMPLOYEE">
                         </form>
                     </td>
                 </tr>
@@ -58,6 +58,8 @@
     </table>
     <br>
     <hr>
+    <div class="col-md-8">
+        <h2>Add employee</h2>
     <form method="POST" action="/projects">
         @csrf
         @error('project_name')
@@ -65,11 +67,12 @@
         @enderror
         <label for="project_name">Project name:</label><br>
         <input type="text" id="project_name" name="project_name"><br>
-        @error('project_employees')
+        @error('project_city')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
-        <label for="project_employees">Project employees:</label><br>
-        <input type="text" id="project_employees" name="project_employees"><br><br>
+        <label for="project_city">Project city:</label><br>
+        <input type="text" id="project_city" name="project_city"><br><br>
         <input class="btn" type="submit" value="Submit" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);">
     </form>
+    </div>
 @endsection

@@ -4,7 +4,6 @@ use App\Http\Controllers\Controller;
 
 namespace App\Http\Controllers;
 use App\Models\Employee;
-// use App\Models\Project;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -55,16 +54,4 @@ class EmployeeController extends Controller
             : redirect('/employees/' . $id)->with('status_error', 'Employee was not updated!');
     }
 }
-//     public function storeEmployee($id, Request $request)
-//     {
-//         $this->validate($request, [
-//             'employee_name' => 'required|max:40'
-//         ]);
-//         $pr = Project::find($id);
-//         $em = new Employee();
-//         $em->employee_name = $request['employee_name'];
-//         $pr->employees()->save($em);
-//         return redirect()->back()->with('status_success', 'Employee added!');
-//     }
-// }
 
