@@ -11,7 +11,8 @@ class CreateProjectsTable extends Migration
      *
      * @return void
      */
-    public function up(){
+    public function up()
+    {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
             $table->string('project_name');
@@ -25,7 +26,8 @@ class CreateProjectsTable extends Migration
      *
      * @return void
      */
-    public function down(){
+    public function down()
+    {
         Schema::dropIfExists('projects');
     }
 }

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Employee extends Model
 {
     use HasFactory;
-    
-    public function employees()
+
+    public function project()
     {
-        return $this->hasMany('App\Models\Employee');
+        return $this->belongsTo('App\Models\Project');
     }
 }

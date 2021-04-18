@@ -11,4 +11,16 @@
         <input type="text" name="project_employees" value="{{ $project['project_employees'] }}"><br>
         <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit" value="UPDATE">
     </form>
+
+
+    @foreach ($project->employees as $employee)
+        <p {{ $employee['employee_name'] }}></p>
+    @endforeach
+    <form action="{{ route('projects.employees.store', $project['id']) }}" method="POST">
+        @csrf
+        <input type="text" name="employee_name"><br>
+        <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit"
+            value="ADD EMPLOYEE">
+    </form>
 @endsection
+

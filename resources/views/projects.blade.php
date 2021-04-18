@@ -22,6 +22,7 @@
                 <th>ID</th>
                 <th>Project name</th>
                 <th>Project employees</th>
+                <th>Project employees</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,13 +33,24 @@
                     <td>{{ $project['project_name'] }}</td>
                     <td>{{ $project['project_employees'] }}</td>
                     <td>
+                        @foreach ($project->employees as $employee)
+                            {{ $employee['employee_name'] }}{{ $loop->last ? '' : ', ' }}
+                        @endforeach
+                    </td>
+                    <td>
                         <form class="d-inline" action="{{ route('projects.destroy', $project['id']) }}" method="POST">
                             @method('DELETE') @csrf
-                            <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit" value="DELETE">
-                        </form> 
+                            <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit"
+                                value="DELETE">
+                        </form>
                         <form class="d-inline" action="{{ route('projects.show', $project['id']) }}" method="GET">
-                            <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit" value="UPDATE">
-                        </form>  
+                            <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit"
+                                value="UPDATE">
+                        </form>
+                        <form class="d-inline" action="{{ route('projects.show', $project['id']) }}" method="GET">
+                            <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit"
+                                value="ADD EMPLOYEE">
+                        </form>
                     </td>
                 </tr>
             @endforeach

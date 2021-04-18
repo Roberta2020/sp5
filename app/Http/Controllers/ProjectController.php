@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\Employee;
 
 class ProjectController extends Controller
 {
@@ -50,8 +51,20 @@ class ProjectController extends Controller
         $pr = Project::find($id);
         $pr->project_name = $request['project_name'];
         $pr->project_employees = $request['project_employees'];
-        return ($pr->save() !== 1) 
-        ? redirect('/projects/' . $id)->with('status_success', 'Project was updated!') 
-        : redirect('/projects/' . $id)->with('status_error', 'Project was not updated!');
+        return ($pr->save() !== 1)
+            ? redirect('/projects/' . $id)->with('status_success', 'Project was updated!')
+            : redirect('/projects/' . $id)->with('status_error', 'Project was not updated!');
+    }
+
+    public function storeEmployee($id, Request $request)
+    {
+        $this->validate($request, [
+            'employee_name' => 'required|max:40'
+        ]);
+        $pr = Project::find($id);
+        $em = new Employee();
+        $em->employee_name = $request['employee_name'];
+        $pr->employees()->save($em);
+        return redirect()->back()->with('status_success', 'Employee added!');
     }
 }
