@@ -10,7 +10,7 @@ Simple CRUD application built with Laravel framework.
 The main page is for users and it has function to navigate through the menu and view pages.
 
 ### Admin
-To use page features you need to go to http://localhost. 
+To use page features you need to log in. 
 There will be log in form:
 
 Log in information:
