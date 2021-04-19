@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProjectController;
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +16,7 @@ use App\Http\Controllers\ProjectController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+return view('welcome');
 })->name('index');
 
 Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
@@ -31,6 +32,11 @@ Route::delete('/projects/{id}', [ProjectController::class, 'destroy'])->name('pr
 Route::put('/projects/{id}', [ProjectController::class, 'update'])->name('projects.update');
 
 Route::post('/projects/{id}/employees', [ProjectController::class, 'storeEmployee'])->name('projects.employees.store');
+
+
+Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::any('/{anything}', function(){ 
     return view('errors/error'); 

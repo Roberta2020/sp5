@@ -10,7 +10,6 @@ use App\Models\Employee;
 
 class ProjectController extends Controller
 {
-
     public function index()
     {
         return view('projects', ['projects' => Project::all()]);

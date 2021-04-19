@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 @section('content')
     {{-- Validation error --}}
     @if ($errors->any())
@@ -33,6 +33,7 @@
                     <td>
                         {{ $employee->project['project_name'] }}</td>
                     <td>
+                        @if (auth()->check())
                         <form class="d-inline" action="{{ route('employees.destroy', $employee['id']) }}" method="POST">
                             @method('DELETE') @csrf
                             <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit"
@@ -42,6 +43,7 @@
                             <input class="btn" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);" type="submit"
                                 value="UPDATE">
                         </form>
+                        @endif
                     </td>
                 </tr>
             @endforeach
@@ -49,6 +51,15 @@
     </table>
     <br>
     <hr>
+    @if (auth()->check())
+    @if (session('status_success'))
+        <div class="alert alert-success" role="alert">{{ session('status_success') }}</div>
+    @endif
+    @if (session('status_error'))
+        <div class="alert alert-danger" role="alert">{{ session('status_error') }}</div>
+    @endif
+    <div class="col-md-8">
+        <h2>Add project</h2>
     <form method="POST" action="/employees">
         @csrf
         @error('employee_name')
@@ -71,4 +82,6 @@
         @enderror
         <input class="btn" type="submit" value="Submit" style="background: linear-gradient(130deg, #ffa34f, #ff6f68);">
     </form>
+    </div>
+    @endif
 @endsection
